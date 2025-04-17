@@ -27,11 +27,11 @@ describe('Тесты для формы', () => {
         const passwordInput = screen.getByLabelText(/password:/i);
 
         fireEvent.change(firstNameInput, {target: {value: "889sad"}});
-        fireEvent.change(surnameInput, {target: {value: "-ролф"}});
+        fireEvent.change(surnameInput, {target: {value: "yh-ubu7"}});
         fireEvent.change(emailInput, {target: {value: "jakhd"}});
         fireEvent.change(passwordInput, {target: {value: "21"}});
         
-        expect(screen.getByText(/Only letters, spaces, and hyphens are allowed!/i)).toBeInTheDocument();
+        expect(screen.getAllByText(/Only letters, spaces, and hyphens are allowed!/i)).toHaveLength(2);
         expect(screen.getByText(/This is not valid email!/i)).toBeInTheDocument();
         expect(screen.getByText(/Password must be more than 4 characters!/i)).toBeInTheDocument();
         
