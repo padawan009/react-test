@@ -4,9 +4,14 @@ import { beforeEach, describe, expect, test } from "vitest";
 import MyForm from './MyForm'
 
 describe('Тесты для формы', () => {
+    let firstNameInput, surnameInput, emailInput, passwordInput;
 
     beforeEach(() => {
         render(<MyForm />);  
+        firstNameInput = screen.getByLabelText(/^name:$/i);
+        surnameInput = screen.getByLabelText(/^surname:$/i);
+        emailInput = screen.getByLabelText(/e-mail:/i);
+        passwordInput = screen.getByLabelText(/password:/i);
     })
 
 
@@ -21,10 +26,6 @@ describe('Тесты для формы', () => {
     })
 
     test('показывать ошибки валидации при неправильных (непустых) значениях', () => {
-        const firstNameInput = screen.getByLabelText(/^name:$/i);
-        const surnameInput = screen.getByLabelText(/^surname:$/i);
-        const emailInput = screen.getByLabelText(/e-mail:/i);
-        const passwordInput = screen.getByLabelText(/password:/i);
 
         fireEvent.change(firstNameInput, {target: {value: "889sad"}});
         fireEvent.change(surnameInput, {target: {value: "yh-ubu7"}});
@@ -46,10 +47,6 @@ describe('Тесты для формы', () => {
     })
 
     test('не показывать ошибки валидации, если все input заполнены корректно', () => {
-        const firstNameInput = screen.getByLabelText(/^name:$/i);
-        const surnameInput = screen.getByLabelText(/^surname:$/i);
-        const emailInput = screen.getByLabelText(/e-mail:/i);
-        const passwordInput = screen.getByLabelText(/password:/i);
 
         fireEvent.change(firstNameInput, {target: {value: "Andy"}});
         fireEvent.change(surnameInput, {target: {value: "White"}});
