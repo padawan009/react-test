@@ -42,13 +42,14 @@ form div {
 
 h2 {
   font-weight: 800;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
 }
 
-p {
+form div p {
   font-weight: 500;
   color: rgb(83, 82, 82);
   font-size: 0.9rem;
+  margin-left: 5px;
 }
 
 label {
@@ -86,9 +87,9 @@ button {
   background-color: beige;
   border: 2px solid black;
   box-shadow: 4px 4px black;
-  border-radius: 5px;
+  border-radius: 20px;
   font-weight: 600;
-  padding: 4px 20px;
+  padding: 5px 20px;
   margin-top: 20px;
   transition: all 0.5s linear;
 }
@@ -97,3 +98,22 @@ button:hover {
   box-shadow: none;
   transform: translateX(3px) translateY(3px);
 }
+
+.error-message {
+  margin-left: auto;
+  color: rgb(229, 108, 108);
+  font-size: 0.8rem;
+  margin-top: -5px;
+  /* animation: error 1s linear 0.5s; */
+}
+
+/* @keyframes error {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+} */
