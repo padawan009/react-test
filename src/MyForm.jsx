@@ -10,7 +10,18 @@ export default function MyForm() {
   });
 
   const [formErrors, setFormErrors] = useState({});
-  // const[isSubmit, setIsSubmit] = useState(false)
+  const[isSubmit, setIsSubmit] = useState(null);
+
+  useEffect(() => {
+    if (isSubmit && Object.keys(formErrors).length === 0) {
+      setFormData({
+        firstName: "",
+        surname: "",
+        email: "",
+        password: "",
+      });
+    }
+  }, [isSubmit, formErrors]);
 
   function handleInput(e) {
     const { name, value } = e.target;
@@ -21,16 +32,14 @@ export default function MyForm() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setFormErrors(validateForm(formData));
-    // setIsSubmit(true);
+    const errors = validateForm(formData);
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      setIsSubmit(true);
+      alert("The form has been successfully submitted")
+    }
+    else setIsSubmit(false)
   }
-
-  // useEffect(() => {
-  //     console.log(formErrors)
-  //     if (Object.keys(formErrors).length === 0 && isSubmit) {
-  //         console.log(formData);
-  //     }
-  // }, [formErrors, isSubmit, formData])
 
   function validateForm(values) {
     const errors = {};
