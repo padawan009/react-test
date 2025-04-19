@@ -9,8 +9,8 @@ describe('Тесты для формы', () => {
     let firstNameInput, surnameInput, emailInput, passwordInput, button;
 
     beforeEach(() => {
-        globalThis.alert = vi.fn();
-        render(<App />);
+        globalThis.alert = vi.fn(); //мокаем alert
+        render(<App />); // рендерим форму для каждого теста
         firstNameInput = screen.getByLabelText(/^Name:$/i);
         surnameInput = screen.getByLabelText(/^Surname:$/i);
         emailInput = screen.getByLabelText(/e-mail:/i);
@@ -44,6 +44,17 @@ describe('Тесты для формы', () => {
         expect(screen.queryByText(/password must/i)).not.toBeInTheDocument();
         expect(screen.queryByText(/password can't/i)).not.toBeInTheDocument();
     });    
+
+    test('проверка вызова alert', async() => {
+        await act(async () => {
+            fireEvent.change(firstNameInput, { target: { value: "Alice" } });
+            fireEvent.change(surnameInput, { target: { value: "blue" } });
+            fireEvent.change(emailInput, { target: { value: "ally@mail.ru" } });
+            fireEvent.change(passwordInput, { target: { value: "dsdf22" } });
+            fireEvent.click(button);
+        });
+        expect(globalThis.alert).toHaveBeenCalledWith("The form has been successfully submitted");
+    })
     
     test('показывать ошибки валидации при неправильных (непустых) значениях', async () => {
         await act(async () => {
