@@ -67,9 +67,16 @@ export default function App() {
       .email("This is not valid email!"),
     password: yup
       .string()
-      .min(5, "Password must be more than 4 characters!")
-      .max(10, "Password can't be more than 10 characters!")
-      .required("Password is required!"),
+      .required("Password is required!")
+      .test(
+        "min-if-not-empty",
+        "Password must be more than 4 characters!",
+        function (value) {
+          if (!value) return true;
+          return value.length >= 5;
+        }
+      )
+      .max(10, "Password can't be more than 10 characters!"),      
   });
 
   return (
